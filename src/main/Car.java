@@ -3,7 +3,7 @@ package src.main;
 import java.awt.*;
 
 
-public class Car extends Movable{       // Why extend from movable?
+public abstract class Car extends Movable{       // Why extend from movable?
     protected int nrDoors; // Number of doors on the car
     public double enginePower; // Engine power of the car
     protected Color color; // Color of the car
