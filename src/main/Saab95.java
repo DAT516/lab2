@@ -1,3 +1,5 @@
+package src.main;
+
 import java.awt.*;
 
 
@@ -60,13 +62,13 @@ public class Saab95 extends Car{
         return enginePower * 0.01 * turbo;
     }
 
-    @Override public void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-    }
-
-    @Override public void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-    }
+//    @Override public void incrementSpeed(double amount){
+//        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+//    }
+//
+//    @Override public void decrementSpeed(double amount){
+//        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+//    }
     
     // // TODO fix this method according to lab pm
     // public void gas(double amount){
@@ -78,7 +80,11 @@ public class Saab95 extends Car{
     //     decrementSpeed(amount);
     // }
     public static void main(String[] args) {  
-        System.out.println("Hello, World!");  
+
+        Saab95 bil = new Saab95();
+
+
+
     }  
 }
 

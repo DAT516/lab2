@@ -1,3 +1,5 @@
+package src.main;
+
 import java.awt.*;
 
 public class Volvo240 extends Car{
@@ -48,13 +50,13 @@ public class Volvo240 extends Car{
         return enginePower * 0.01 * trimFactor;
     }
 
-    @Override public void incrementSpeed(double amount){
-	    currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
-    }
-
-    @Override public void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
-    }
+//    @Override public void incrementSpeed(double amount){
+//	    currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+//    }
+//
+//    @Override public void decrementSpeed(double amount){
+//        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+//    }
 
     // // TODO fix this method according to lab pm
     // public void gas(double amount){
