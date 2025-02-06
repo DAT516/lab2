@@ -1,6 +1,6 @@
 package src.main;
 
-public class Movable {
+public abstract class Movable {
  
     public double currentSpeed = 1;     // How to do this??
     private char direction = 'N';
