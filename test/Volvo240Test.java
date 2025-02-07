@@ -9,8 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Volvo240Test {
 
-
-
     @Test
     @DisplayName("change_speedFactor!")
     void speedFactor() {
@@ -19,6 +17,7 @@ class Volvo240Test {
         assertEquals(speed, car.speedFactor());
 
     }
+
     @Test
     @DisplayName("get_speed!")
     void getCurrentSpeed(){
@@ -34,6 +33,7 @@ class Volvo240Test {
         car.setColor(clr);
         assertEquals(car.color, clr);
     }
+
     @Test
     @DisplayName("start engine!")
     void startEngine(){
@@ -41,6 +41,7 @@ class Volvo240Test {
         car.startEngine();
         assertEquals(0.1, car.currentSpeed);
     }
+
     @Test
     @DisplayName("yes")
     void getColor(){
