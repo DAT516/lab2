@@ -24,7 +24,7 @@ public abstract class CarHaulerTruck extends Truck{
 
     }
     public void unloadCar(){
-        if 
+        
     }
 
     public int getNrCars(){
