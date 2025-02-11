@@ -1,6 +1,4 @@
-package src.main;
-
-public interface Movable {
+public interface IMovable {
     public void move();
     public void turnRight();
     public void turnLeft();
