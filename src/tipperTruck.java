@@ -1,18 +1,36 @@
+package src;
+
 public abstract class tipperTruck extends Truck{
     private int dumpBoxMaxAngle;
     private int currentdumpBoxAngle = 0;
 
+    @Override public void startEngine(){
+        if (getCurrentdumpBoxAngle() > 0){
+            return;
+        }
+        super.startEngine();
+    }
+
 
     public void loadCarriage(double inputWeight){
-        transportationWeight += inputWeight;
+        setTransportationWeight(inputWeight += getTransportationWeight());
     }
 
     public void unloadCarriage(){
-        transportationWeight = 0;
+        setTransportationWeight(0);
+    }
+
+    public final int getCurrentdumpBoxAngle(){
+        return currentdumpBoxAngle;
     }
 
 
     public void raiseDumpBox(int inputAngle){
+
+        if (getCurrentSpeed() > 0){
+            return;
+        }
+
         if (inputAngle < 0){
             inputAngle = 0;
         }
@@ -25,6 +43,9 @@ public abstract class tipperTruck extends Truck{
     }
 
     public void lowerDumpBox(int inputAngle){
+
+
+
         if (inputAngle > 0){
             inputAngle = 0;
         }

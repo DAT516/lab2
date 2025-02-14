@@ -1,3 +1,4 @@
+package src;
 
 import java.awt.*;
 
@@ -7,11 +8,13 @@ public abstract class Vehicle implements IMovable{       // Why extend from mova
     private double enginePower; // Engine power of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
-    private double currentSpeed = 1;
+    private double currentSpeed = 0;
     private char direction = 'N';
     private double x = 0;
     private double y = 0;
+    private boolean engineOn = false;
 
+    
     public void move(){
         // n w s e
         switch(direction){
@@ -55,6 +58,16 @@ public abstract class Vehicle implements IMovable{       // Why extend from mova
         }
     }
 
+    public double[] getPosition(){
+        
+        return new double[]{x, y};
+    }
+
+    public void setPosition(double xPos, double yPos){
+        x = xPos;
+        y = yPos;
+    }
+
     public final int getNrDoors(){
         return nrDoors;
     }
@@ -75,12 +88,22 @@ public abstract class Vehicle implements IMovable{       // Why extend from mova
     }
 
     public void startEngine(){
-	    currentSpeed = 0.1;
+	    if (!engineOn){
+            engineOn = true;
+        }
     }
 
     public void stopEngine(){
-	    currentSpeed = 0;
+	    if (engineOn){
+            engineOn = false;
+            currentSpeed = 0;
+        }
     }
+
+    public boolean getEngineStatus(){
+        return engineOn;
+    }
+
 
     public abstract double speedFactor();
 
@@ -95,6 +118,10 @@ public abstract class Vehicle implements IMovable{       // Why extend from mova
     }
 
     public void gas(double amount){
+        if (!engineOn){
+            return;
+        }
+
         if  (amount >= 0 && amount <= 1){
             incrementSpeed(amount);
         }
