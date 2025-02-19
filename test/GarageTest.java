@@ -1,63 +1,55 @@
 package test;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import src.Car;
-import src.Garage;
-import src.Saab95;
-import src.Volvo240;
+import src.*;
+
+import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GarageTest {
 
+    private Volvo240 volvo;
+    private Saab95 saab;
+
+    @BeforeEach
+    public void setUp(){
+        volvo = new Volvo240(4, 1, Color.BLACK, 5, 20, 1.5);
+        saab = new Saab95(4, 1, Color.BLACK, 5, 20, 1.5);
+    }
+
+
+
     @Test
+    @DisplayName("add car")
     void addCar() {
-        Saab95 saabCar = new Saab95();
         Garage<Saab95> saabGarage = new Garage<>(5);
 
-        saabGarage.addCar(saabCar);
-        assertTrue(saabGarage.carInGarage(saabCar));
+        saabGarage.addCar(saab);
+        assertTrue(saabGarage.carInGarage(saab));
     }
 
     @Test
     void removeCar() {
-        Saab95 saabCar = new Saab95();
         Garage<Saab95> saabGarage = new Garage<>(5);
 
-        saabGarage.addCar(saabCar);
-        saabGarage.removeCar(saabCar);
-        assertFalse(saabGarage.carInGarage(saabCar));
+        saabGarage.addCar(saab);
+        saabGarage.removeCar(saab);
+        assertFalse(saabGarage.carInGarage(saab));
     }
 
 
-    // @Test
-    // void generalGarage(){
-    //     try{
-    //     Saab95 saabCar = new Saab95();
-    //     Volvo240 volvoCar = new Volvo240();
-    //     Garage<Saab95> saabGarage = new Garage<>(5);
+     @Test
+     void removeCar2(){
 
-    //     saabGarage.addCar(saabCar);
-    //     saabGarage.addCar(volvoCar);
+         Garage<Car> generalGarage = new Garage<>(5);
 
-    //     fail();
-    //     }
-    //     catch(Exception e){
-    //         assertTrue(true);
-    //     }
-    // }
-
-//     @Test
-//     void removeCar2(){
-//         Saab95 saabCar = new Saab95();
-//         Volvo240 volvoCar = new Volvo240();
-//         Garage<Car> generalGarage = new Garage<>(5);
-
-//         generalGarage.addCar(saabCar);
-//         generalGarage.addCar(volvoCar);
+         generalGarage.addCar(saab);
+         generalGarage.addCar(volvo);
         
-//         assertTrue(generalGarage.carInGarage(saabCar) && generalGarage.carInGarage(volvoCar));
-//     }
+         assertTrue(generalGarage.carInGarage(saab) && generalGarage.carInGarage(volvo));
+     }
 
 }

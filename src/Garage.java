@@ -38,8 +38,8 @@ public class Garage<T>{
     }
 
     public boolean carInGarage(T inputCar){
-        for(int i = 0; i < cars.length; i++){
-            if(cars[i] != null && cars[i].equals(inputCar)){
+        for (T car : cars) {
+            if (car != null && car.equals(inputCar)) {
                 return true;
             }
         }

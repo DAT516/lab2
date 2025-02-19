@@ -3,16 +3,21 @@ package src;
 import java.awt.*;
 
 public abstract class Car extends Vehicle{
-    private int nrSeats;
+    private final int nrSeats;
     private double weight;
-    private double width;
+    private final double width;
+
+    public Car(int NrDoorsInput, double enginePowerInput, Color colorInput, int nrSeatsInput, double weightInput,
+               double widthInput){
+        super(NrDoorsInput, enginePowerInput, colorInput);
+        nrSeats = nrSeatsInput;
+        weight = weightInput;
+        width = widthInput;
+
+    }
 
     public int getNrSeats(){
         return nrSeats;
-    }
-
-    public void setNrSeats(int inputNumber){
-        nrSeats = inputNumber;
     }
 
     public double getWeight(){
@@ -27,8 +32,5 @@ public abstract class Car extends Vehicle{
         return width;
     }
 
-    public void setWidth(double amount){
-        width = amount;
-    }
 }
 

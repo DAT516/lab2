@@ -1,14 +1,26 @@
 package src;
 
+import java.awt.*;
 import java.util.Stack;
 
 public abstract class CarHaulerTruck extends Truck{
-    private int carCapacity;
-    private Stack<Car> loadedCars;
-    private double truckWidth;
-    private int nrCars = 0;
+    private final int carCapacity;
+    private final Stack<Car> loadedCars = new Stack<>();
+    private final double truckWidth;
     private boolean rampIsDown = true;
 
+
+    public CarHaulerTruck(int NrDoorsInput, double enginePowerInput, Color colorInput, double maxWeightInput,
+                          int carCapacityInput, double truckWidthInput){
+        super(NrDoorsInput, enginePowerInput, colorInput, maxWeightInput);
+        carCapacity = carCapacityInput;
+        truckWidth = truckWidthInput;
+
+    }
+
+    public Car getTopCar(){
+        return loadedCars.peek();
+    }
 
     public boolean getRampStatus(){
         return rampIsDown;
@@ -24,8 +36,6 @@ public abstract class CarHaulerTruck extends Truck{
         }
         rampIsDown = true;
     }
-
-
 
     @Override public void startEngine(){
         if (rampIsDown){
@@ -68,55 +78,59 @@ public abstract class CarHaulerTruck extends Truck{
         double truckY = truckPos[1];
 
 
-        if ((carX > (truckX+5)) || (carX  < (truckX-5))){
+        if ((carX > (truckX+5)) || (carX < (truckX-5))){
             return;
         }
 
-        if ((carY > (truckY+5)) || (carY  < (truckY-5))){
+        if ((carY > (truckY+5)) || (carY < (truckY-5))){
             return;
         }
 
-        if (!(car.getWeight() <= getMaxWeight()-getTransportationWeight())){
+        if (getNrCars() >= (getCarCapacity())){
             return;
         }
 
-        if (!(getNrCars() >= (carCapacity-1))){
+        if (car.getWeight() >= (getMaxWeight()-getTransportationWeight())){
             return;
         }
 
-
-        if (car.getWidth() > truckWidth){
+        if (car.getWidth() > getTruckWidth()){
             return;
         }
 
-        loadedCars[nrCars] = car;
-        nrCars += 1;
-
+        loadedCars.push(car);
     }
     public void unloadCar(){
         if (!rampIsDown){
             return;
         }
 
-        if (loadedCars.length == 0){
+        if (loadedCars.isEmpty()){
             return;
         }
 
-        Car car = loadedCars[loadedCars.length-1];
+        Car car = loadedCars.pop();
         double[] carPos = car.getPosition();
 
         car.setPosition(carPos[0]+3, carPos[1]+2);
         
     }
 
-    public Car[] getCars(){
+    public Stack<Car> getCars(){
         return loadedCars;
     }
 
     public int getNrCars(){
-        return loadedCars.length;
+        return loadedCars.size();
     }
 
+    public double getTruckWidth(){
+        return truckWidth;
+    }
+
+    public int getCarCapacity(){
+        return carCapacity;
+    }
 }
 
 

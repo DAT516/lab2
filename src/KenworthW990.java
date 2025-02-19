@@ -4,14 +4,8 @@ import java.awt.Color;
 
 public class KenworthW990 extends CarHaulerTruck{
     
-    public KenworthW990(Color clr){
-        int carCapacity = 6;
-        Car[] loadedCars = new Car[carCapacity];
-        double truckWidth = 2;
-        double maxWeight = 40;
-        int nrDoors = 2;
-        int enginePower = 510;
-        Color color = clr;
+    public KenworthW990(Color colorInput){
+        super(2, 405, colorInput,200, 6, 2.5);
     }
 
     public double speedFactor(){

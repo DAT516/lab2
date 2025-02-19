@@ -1,8 +1,17 @@
 package src;
 
+import java.awt.*;
+
 public abstract class tipperTruck extends Truck{
-    private int dumpBoxMaxAngle;
+    private final int dumpBoxMaxAngle;
     private int currentdumpBoxAngle = 0;
+
+
+    public tipperTruck(int NrDoorsInput, double enginePowerInput, Color colorInput, double maxWeightInput,
+                       int dumpBoxMaxAngleInput){
+        super(NrDoorsInput, enginePowerInput, colorInput, maxWeightInput);
+        dumpBoxMaxAngle = dumpBoxMaxAngleInput;
+    }
 
     @Override public void startEngine(){
         if (getCurrentdumpBoxAngle() > 0){
@@ -13,7 +22,7 @@ public abstract class tipperTruck extends Truck{
 
 
     public void loadCarriage(double inputWeight){
-        setTransportationWeight(inputWeight += getTransportationWeight());
+        setTransportationWeight(inputWeight + getTransportationWeight());
     }
 
     public void unloadCarriage(){

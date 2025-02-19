@@ -1,5 +1,5 @@
 package test;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import src.Car;
@@ -8,17 +8,27 @@ import src.Saab95;
 import src.Volvo240;
 
 import java.awt.*;
+import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class KenworthW990Test {
 
+    private KenworthW990 truck;
+    private Volvo240 volvo;
+    private Saab95 saab;
+
+    @BeforeEach
+    public void setUp(){
+        truck = new KenworthW990(Color.BLUE);
+        volvo = new Volvo240(4, 1, Color.BLACK, 5, 20, 1.5);
+        saab = new Saab95(4, 1, Color.BLACK, 5, 20, 1.5);
+    }
 
     @Test
     @DisplayName("getNrCars")
     void getNrCars(){
-        KenworthW990 truck = new KenworthW990(Color.BLUE);
 
         assertEquals(0, truck.getNrCars());
     }
@@ -26,7 +36,6 @@ class KenworthW990Test {
     @Test
     @DisplayName("start engine")
     void startEngine(){
-        KenworthW990 truck = new KenworthW990(Color.BLUE);
 
         truck.startEngine();
         assertFalse(truck.getEngineStatus());
@@ -40,7 +49,6 @@ class KenworthW990Test {
     @Test
     @DisplayName("lower ramp")
     void lowerRamp(){
-        KenworthW990 truck = new KenworthW990(Color.BLUE);
 
         truck.raiseRamp();
         truck.startEngine();
@@ -50,25 +58,40 @@ class KenworthW990Test {
     }
 
     @Test
+    @DisplayName("get max cars")
+    void getCarCapacity(){
+        assertEquals(Color.BLUE, truck.getColor());
+        assertEquals(6, truck.getCarCapacity());
+    }
+
+    @Test
     @DisplayName("load cars")
     void loadCar(){
-        KenworthW990 truck = new KenworthW990(Color.BLUE);
-        Volvo240 volvo = new Volvo240();
-        Saab95 saab = new Saab95();
-
 
         truck.loadCar(volvo);
 
-        Car[] cars = truck.getCars();
-        assertEquals(1, cars.length);
-        assertEquals(volvo, cars[0]);
+        assertEquals(1, truck.getNrCars());
 
+        truck.loadCar(volvo);
+        truck.loadCar(volvo);
+        truck.loadCar(volvo);
+        truck.loadCar(volvo);
         truck.loadCar(saab);
-        assertEquals(2, cars.length);
-        assertEquals(saab, cars[1]);
+        truck.loadCar(volvo);
 
+        assertEquals(saab, truck.getTopCar());
 
     }
 
+    @Test
+    @DisplayName("unload cars")
+    void unloadCar(){
 
+        truck.loadCar(volvo);
+        truck.loadCar(saab);
+        truck.unloadCar();
+        assertEquals(1, truck.getNrCars());
+        assertEquals(volvo, truck.getTopCar());
+
+    }
 }
